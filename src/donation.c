@@ -59,7 +59,7 @@ void donationData_add (tDonationData* data, tDonation donation)
     for (int i = 0; i < data->count; i++)
     {
         if (strcmp(data->donations[i].document, donation.document) == 0 &&
-            date_equal(data->donations[i].date, donation.date) &&
+            date_equals(data->donations[i].date, donation.date) &&
             strcmp(data->donations[i].projectCode, donation.projectCode) == 0)
         {
             // The donation already exists, so we don't add it again
@@ -119,7 +119,7 @@ void donationData_del (tDonationData* data, tDate date, char* document, char* pr
     // Find the donation with the given date, document and project code
     int i, foundIndex = -1;
     for (i = 0; i < data->count; i++) {
-        if (dateEquals(data->donations[i].date, date) &&
+        if (date_equals(data->donations[i].date, date) &&
             strcmp(data->donations[i].document, document) == 0 &&
             strcmp(data->donations[i].projectCode, projectCode) == 0) {
             foundIndex = i;

@@ -46,7 +46,7 @@ typedef struct {
 // Ex 2: Define your methods here ....
 
 // Initialize the donations data 
-void donationData_init(tDonationData* data)
+void donationData_init(tDonationData* data);
 
 // Get the number of donations
 int donationData_len (tDonationData data);
