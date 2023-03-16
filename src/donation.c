@@ -153,7 +153,7 @@ void donationData_del (tDonationData* data, tDate date, char* document, char* pr
         }
         data->count--;
     } else {
-         assert(foundIndex == -1); // No donation found or removed
+         assert(foundIndex != -1); // No donation found or removed
     }
 }
 
