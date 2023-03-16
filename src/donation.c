@@ -28,12 +28,12 @@ bool date_equals(tDate date1, tDate date2)
 // EX2: Implement your methods here....
 
 // Initialize the donations data 
-void donationData_init(tDonationData* donationData) 
+void donationData_init(tDonationData* data) 
 {    
-    assert(donationData != NULL); // Verify that the pointer is not null
+    assert(data != NULL); // Verify that the pointer is not null
 
     // Initialize the donationData counter 
-    donationData->count = 0;
+    data->count = 0;
 
     assert(data->count == 0); // Verify that the counter has been initialized correctly
 }
@@ -124,9 +124,15 @@ void donationData_get(tDonationData data, int index, char* buffer)
 // Remove a donation
 void donationData_del (tDonationData* data, tDate date, char* document, char* projectCode)
 {
-    assert(data != NULL); // Ensure that data is not NULL
-    assert(date != NULL && document != NULL && projectCode != NULL); // Ensure that input strings are not NULL
-    assert(data->count > 0); // Ensure that the data structure contains at least one donation
+    // Check for null pointers
+    assert(data != NULL);
+    assert(document != NULL);
+    assert(projectCode != NULL);
+
+    // Check date values
+    assert(date.day > 0 && date.day <= 31);
+    assert(date.month > 0 && date.month <= 12);
+    assert(date.year >= 1900 && date.year <= 2100);
 
     // Find the donation with the given date, document and project code
     int i, foundIndex = -1;
