@@ -28,17 +28,25 @@ bool date_equals(tDate date1, tDate date2)
 // EX2: Implement your methods here....
 
 // Initialize the donations data 
-void donationData_init(tDonationData* donationData) {
+void donationData_init(tDonationData* donationData) 
+{    
+    assert(donationData != NULL); // Verify that the pointer is not null
+
+    // Initialize the donationData counter 
     donationData->count = 0;
+
+    assert(data->count == 0); // Verify that the counter has been initialized correctly
 }
 
 // Get the number of donations
-int donationData_len (tDonationData data) {
+int donationData_len (tDonationData data) 
+{
     return data.count;
 }
 
 // Parse input from CSVEntry
-void donation_parse(tDonation* donation, tCSVEntry entry) {
+void donation_parse(tDonation* donation, tCSVEntry entry) 
+{
     // Parse date
     sscanf(entry.fields[0], "%d/%d/%d", &donation->date.day, &donation->date.month, &donation->date.year);
 
@@ -98,16 +106,16 @@ void donationData_add (tDonationData* data, tDonation donation)
 
 void donationData_get(tDonationData data, int index, char* buffer)
 {
-    // Verificar si el índice es válido
+    // Check if the index is valid
     if (index < 0 || index >= data.count) {
-        buffer[0] = '\0'; // Establecer el buffer como una cadena vacía
+        buffer[0] = '0'; // Set buffer as empty string
         return;
     }
 
-    // Obtener la donación correspondiente
+    // Get the corresponding donation.
     tDonation donation = data.donations[index];
 
-    // Formatear los campos de la donación en una cadena de caracteres
+    // Format the donation fields into a string.
     sprintf(buffer, "%02d/%02d/%04d;%s;%s;%s;%.2f",
             donation.date.day, donation.date.month, donation.date.year,
             donation.document, donation.ngo, donation.projectCode, donation.amount);
@@ -116,6 +124,10 @@ void donationData_get(tDonationData data, int index, char* buffer)
 // Remove a donation
 void donationData_del (tDonationData* data, tDate date, char* document, char* projectCode)
 {
+    assert(data != NULL); // Ensure that data is not NULL
+    assert(date != NULL && document != NULL && projectCode != NULL); // Ensure that input strings are not NULL
+    assert(data->count > 0); // Ensure that the data structure contains at least one donation
+
     // Find the donation with the given date, document and project code
     int i, foundIndex = -1;
     for (i = 0; i < data->count; i++) {
@@ -134,6 +146,8 @@ void donationData_del (tDonationData* data, tDate date, char* document, char* pr
             data->donations[j] = data->donations[j+1];
         }
         data->count--;
+    } else {
+         assert(foundIndex == -1); // No donation found or removed
     }
 }
 
