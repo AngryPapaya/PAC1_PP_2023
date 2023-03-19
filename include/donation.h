@@ -31,9 +31,9 @@ bool date_equals(tDate date1, tDate date2);
 
 typedef struct {
     tDate date;
-    char document[MAX_DOC_ID];
-    char ngo[MAX_NGO_CODE];
-    char projectCode[MAX_PROJECT_CODE];
+    char *document;
+    char *ngo;
+    char *projectCode;
     float amount;
 } tDonation;
 

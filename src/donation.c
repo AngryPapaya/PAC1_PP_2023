@@ -50,11 +50,14 @@ void donation_parse(tDonation* donation, tCSVEntry entry)
     // Parse date
     sscanf(entry.fields[0], "%d/%d/%d", &donation->date.day, &donation->date.month, &donation->date.year);
 
-    // Copy document and NGO
+    // Allocate memory for document, ngo and projectCode
+    donation->document = malloc(strlen(entry.fields[1]) + 1);
+    donation->ngo = malloc(strlen(entry.fields[2]) + 1);
+    donation->projectCode = malloc(strlen(entry.fields[3]) + 1);
+
+    // Copy data
     strcpy(donation->document, entry.fields[1]);
     strcpy(donation->ngo, entry.fields[2]);
-
-    // Copy project code
     strcpy(donation->projectCode, entry.fields[3]);
 
     // Parse amount
@@ -153,7 +156,7 @@ void donationData_del (tDonationData* data, tDate date, char* document, char* pr
         }
         data->count--;
     } else {
-         assert(foundIndex != -1); // No donation found or removed
+         assert(foundIndex == -1); // No donation found or removed
     }
 }
 
